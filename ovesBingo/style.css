@@ -1,8 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@800;900&display=swap");
 
+/* Base */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   font-family: "Trebuchet MS", sans-serif;
-  background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url("./images/background.jpg") center/cover no-repeat fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url("./images/background.jpg") center/cover no-repeat fixed;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -45,11 +56,11 @@ button:hover {
 
 #board {
   display: grid;
-  grid-template-columns: repeat(5, minmax(100px, 1fr)); /* колонки чуть уже */
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
   gap: 8px;
   margin-top: 20px;
   width: 95%;
-  max-width: 700px; /* поле немного меньше */
+  max-width: 700px;
   justify-items: stretch;
   align-items: stretch;
 }
@@ -68,7 +79,7 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  aspect-ratio: 1.05 / 1; /* чуть ниже и уже */
+  aspect-ratio: 1.05 / 1;
   padding: 6px;
   font-size: clamp(0.85rem, 2.3vw, 1.05rem);
   line-height: 1.2;
@@ -78,7 +89,6 @@ button:hover {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
-
 
 .cell:hover {
   transform: scale(1.05);
@@ -103,7 +113,6 @@ button:hover {
 }
 
 #desc {
-  /* margin: 10px 20px; */
   margin-top: 16px;
   padding: 12px 18px;
   width: 90%;
@@ -131,7 +140,8 @@ button:hover {
   justify-content: center;
 }
 
-button, a#tgBtn {
+button,
+a#tgBtn {
   border: none;
   border-radius: 8px;
   padding: 10px 25px;
@@ -149,58 +159,65 @@ button, a#tgBtn {
   background: linear-gradient(145deg, #ffd95a, #ffb300);
   box-shadow: 0 0 6px rgba(255, 200, 0, 0.5);
 }
+
 #refreshBtn:hover {
   transform: scale(1.05);
   background: linear-gradient(145deg, #ffe58a, #ffc933);
 }
 
-@media (max-width: 768px) {
+/* ===== Tablet (≤1024px) ===== */
+@media (max-width: 1024px) {
   #board {
-    max-width: 95vw;
+    max-width: 560px;
+    grid-template-columns: repeat(5, minmax(80px, 1fr));
+    gap: 10px;
+  }
+
+  .cell {
+    aspect-ratio: 1 / 1;
+    padding: 6px;
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+  }
+}
+
+/* ===== Phones (≤600px) ===== */
+@media (max-width: 600px) {
+  body {
+    padding: 0 8px;
+  }
+
+  h2 {
+    margin-top: 12px;
+  }
+
+  .btns button {
+    min-width: auto;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  #board {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 6px;
   }
 
   .cell {
-    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
-    padding: 4px;
+    min-width: 0;
     aspect-ratio: 1 / 1;
+    padding: 4px;
+    font-size: clamp(0.7rem, 3.2vw, 0.9rem);
+    border-width: 1px;
+    overflow: hidden;
+    overflow-wrap: anywhere;
   }
 
-  h2 {
-    font-size: clamp(1.2rem, 6vw, 2rem);
-    transform: scaleY(1.1);
-  }
-
-  button {
-    padding: 8px 16px;
-    font-size: 0.8rem;
-    min-width: 120px;
+  .cross::after {
+    font-size: 10vw;
   }
 
   #desc {
-    font-size: clamp(0.75rem, 3.5vw, 0.9rem);
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
-  #board {
-    max-width: 100%;
-    gap: 4px;
-  }
-
-  .cell {
-    font-size: clamp(0.65rem, 2.8vw, 0.85rem);
-    padding: 3px;
-    border-radius: 8px;
-  }
-
-  h2 {
-    font-size: clamp(1rem, 7vw, 1.8rem);
-  }
-
-  button {
-    font-size: 0.75rem;
-    min-width: 100px;
+    width: 100%;
   }
 }
